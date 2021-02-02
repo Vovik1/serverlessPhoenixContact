@@ -1,0 +1,31 @@
+@import 'variables.scss';
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+.app {
+  margin: 0;
+  font: 500 $fontSize/1.25 'Montserrat', 'Helvetica Neue', 'Helvetica', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+#root {
+  height: 100%;
+  display: flex;
+  & > div {
+    height: 100vh;
+    overflow-y: auto;
+  }
+}
