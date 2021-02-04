@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-smartsystems-dev-140843-authRole",
+      "UnauthRoleArn": "arn:aws:iam::114100681027:role/amplify-smartsystems-dev-140843-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::114100681027:role/amplify-smartsystems-dev-140843-authRole",
+      "Region": "eu-west-2",
+      "DeploymentBucketName": "amplify-smartsystems-dev-140843-deployment",
+      "UnauthRoleName": "amplify-smartsystems-dev-140843-unauthRole",
+      "StackName": "amplify-smartsystems-dev-140843",
+      "StackId": "arn:aws:cloudformation:eu-west-2:114100681027:stack/amplify-smartsystems-dev-140843/bb19ff50-66e1-11eb-89c7-021f9c53ecf8",
+      "AmplifyAppId": "d2ilhscf5nbc22"
+    },
+    "categories": {
+      "auth": {
+        "smartsystemsd303c63f": {}
+      }
+    }
+  }
+}

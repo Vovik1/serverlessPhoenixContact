@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "smartsystemsd303c63f": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}
