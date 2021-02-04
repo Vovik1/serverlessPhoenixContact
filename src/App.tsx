@@ -5,6 +5,7 @@ import { observer } from 'mobx-react';
 import { AuthContext, useCognito, STATUS } from 'hooks';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import PrivateRoute from 'routes/PrivateRoute';
+import { withAuthenticator } from '@aws-amplify/ui-react';
 
 function App() {
   const auth = useCognito();
@@ -27,5 +28,5 @@ function App() {
     </>
   );
 }
-
-export default observer(App);
+// withAuthenticator temporary before we will use custom login form
+export default withAuthenticator(observer(App));
