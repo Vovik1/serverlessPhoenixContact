@@ -18,13 +18,13 @@ function LeftMenuPanel() {
   return (
     <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
       <div className="logo" />
-      <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
+      <Menu theme="dark" mode="inline">
         <SubMenu key="dashboard" icon={<DesktopOutlined />} title="Dashboard">
           <Menu.Item key="1">
-            <Link to="/analysis">Analysis</Link>
+            <Link to="/main/analysis">Analysis</Link>
           </Menu.Item>
           <Menu.Item key="2">
-            <Link to="/monitoring">Monitoring</Link>
+            <Link to="/main/monitoring">Monitoring</Link>
           </Menu.Item>
         </SubMenu>
       </Menu>
