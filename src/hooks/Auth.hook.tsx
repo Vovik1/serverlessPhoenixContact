@@ -54,7 +54,10 @@ export const useCognito = () => {
       .then((session) => {
         if (session && session.isValid()) {
           Auth.currentUserInfo().then((user: IUser) => {
-            setUser({ username: user.username, token: session.getAccessToken() });
+            setUser({
+              username: user.username,
+              token: session.getAccessToken(),
+            });
             setStatus(STATUS.DONE);
           });
         }
