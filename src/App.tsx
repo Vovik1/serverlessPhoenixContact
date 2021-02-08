@@ -7,6 +7,8 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import PrivateRoute from 'routes/PrivateRoute';
 import { withAuthenticator } from '@aws-amplify/ui-react';
 
+const redirects = ['/', '/dashboard'];
+
 function App() {
   const auth = useCognito();
   return (
@@ -15,8 +17,15 @@ function App() {
         <AuthContext.Provider value={auth}>
           <Router>
             <Switch>
-              <PrivateRoute exact path="/" component={() => <Redirect to="/main" />} />
-              <PrivateRoute path="/main" component={() => <MainPage />} />
+              {redirects.map((item) => (
+                <PrivateRoute
+                  key={item}
+                  exact
+                  path={item}
+                  component={() => <Redirect to="/dashboard/monitoring" />}
+                />
+              ))}
+              <PrivateRoute path="/dashboard" component={() => <MainPage />} />
               <Route exact path="/login" component={() => <Login />} />
               <Route path="*" component={() => <div>404</div>} />
             </Switch>
