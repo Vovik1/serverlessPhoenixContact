@@ -2,6 +2,7 @@ import React from 'react';
 import { Layout, Breadcrumb } from 'antd';
 import styles from './Monitoring.module.scss';
 import { observer } from 'mobx-react';
+import LineChart from 'components/Charts/LineChart/LineChart';
 const { Content } = Layout;
 
 function Monitoring() {
@@ -12,7 +13,7 @@ function Monitoring() {
           <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
           <Breadcrumb.Item>Monitoring</Breadcrumb.Item>
         </Breadcrumb>
-        <div style={{ padding: 24, minHeight: 360 }}>Monitoring</div>
+        <LineChart />
       </Content>
     </>
   );

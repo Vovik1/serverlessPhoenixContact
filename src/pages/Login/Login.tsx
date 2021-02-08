@@ -30,7 +30,7 @@ const Login = () => {
   const { user } = useAuth();
 
   if (user) {
-    return <Redirect to="/main" />;
+    return <Redirect to="/dashboard" />;
   }
 
   return (
