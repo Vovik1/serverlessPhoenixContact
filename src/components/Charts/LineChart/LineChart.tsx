@@ -16,7 +16,7 @@ interface LineChartProps {
   data?: number[][];
 }
 
-const LineChart = ({ data }: LineChartProps) => {
+export default function LineChart({ data }: LineChartProps) {
   const intervalFunction = useRef<NodeJS.Timeout>();
 
   const onLoad = useCallback((series: Series) => {
@@ -43,6 +43,4 @@ const LineChart = ({ data }: LineChartProps) => {
       />
     </div>
   );
-};
-
-export default LineChart;
+}

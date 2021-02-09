@@ -1,12 +1,11 @@
 import React from 'react';
-import styles from './MainPage.module.scss';
 import { PageLayout } from 'components';
 import { Analysis, Header, LeftMenuPanel, Monitoring } from 'sections';
-import { Switch, Redirect } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import { observer } from 'mobx-react';
 import PrivateRoute from 'routes/PrivateRoute';
 
-function MainPage() {
+function Dashboard() {
   return (
     <PageLayout>
       <LeftMenuPanel />
@@ -21,4 +20,4 @@ function MainPage() {
   );
 }
 
-export default observer(MainPage);
+export default observer(Dashboard);
