@@ -1,21 +1,24 @@
-import React from 'react';
-import { Layout, Breadcrumb } from 'antd';
+import React, { useEffect } from 'react';
 import styles from './Monitoring.module.scss';
 import { observer } from 'mobx-react';
 import LineChart from 'components/Charts/LineChart/LineChart';
-const { Content } = Layout;
+import { outputStore as store } from 'stores';
+import { Card, Content, Breadcrumb } from 'components';
+
+const breadcrumbLabels = ['Dashboard', 'Monitoring'];
 
 function Monitoring() {
+  useEffect(() => {
+    store.load();
+  }, []);
+
   return (
-    <>
-      <Content style={{ margin: '0 16px' }}>
-        <Breadcrumb style={{ margin: '16px 0' }}>
-          <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
-          <Breadcrumb.Item>Monitoring</Breadcrumb.Item>
-        </Breadcrumb>
+    <Content>
+      <Breadcrumb labels={breadcrumbLabels} />
+      <Card className={styles.lineChartCard}>
         <LineChart />
-      </Content>
-    </>
+      </Card>
+    </Content>
   );
 }
 
