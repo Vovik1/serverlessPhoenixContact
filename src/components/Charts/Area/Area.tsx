@@ -7,18 +7,19 @@ import Highcharts from 'highcharts/highstock';
 import { getChartConfig } from './getChartConfig';
 import { Chart, Series } from 'highcharts';
 
-import styles from './LineChart.module.scss';
+import styles from './Area.module.scss';
+import { AreaChartTypes } from '../types';
 
 HighchartsMore(Highcharts);
 // Highcharts.setOptions(styleOptions);
 
-interface LineChartProps {
+interface AreaProps {
   data?: number[][];
+  type?: AreaChartTypes;
 }
 
-export default function LineChart({ data }: LineChartProps) {
-  const intervalFunction = useRef<NodeJS.Timeout>();
-
+export default function Area({ type }: AreaProps) {
+  const options = useMemo(() => getChartConfig(type), [type]);
   const wrapRef = useRef<HTMLDivElement>(null);
 
   const chartRef = useRef<{ chart: Chart; container: RefObject<HTMLDivElement> }>(null);
@@ -31,19 +32,6 @@ export default function LineChart({ data }: LineChartProps) {
       }
     }, 0);
   }, [wrapRef]);
-  const onLoad = useCallback((series: Series) => {
-    intervalFunction.current = setInterval(() => {
-      const x = new Date().getTime(); // current time
-      const y = Math.round(Math.random() * 100);
-      series.addPoint([x, y]);
-    }, 1000);
-  }, []);
-
-  useEffect(() => {
-    return () => clearInterval(intervalFunction.current as NodeJS.Timeout);
-  });
-
-  const options = useMemo(() => getChartConfig(onLoad), [onLoad]);
 
   return (
     <div className={styles.root} ref={wrapRef}>
@@ -51,6 +39,7 @@ export default function LineChart({ data }: LineChartProps) {
         highcharts={Highcharts}
         constructorType={options.constructorType}
         options={options}
+        containerProps={{ style: { width: '100%', height: '70px' } }}
         ref={chartRef}
       />
     </div>

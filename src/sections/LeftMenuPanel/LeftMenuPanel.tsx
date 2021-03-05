@@ -3,6 +3,7 @@ import { Layout, Menu } from 'antd';
 import { DesktopOutlined, BarChartOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 import { Link, useLocation } from 'react-router-dom';
+import styles from './LeftMenuPanel.module.scss';
 
 const { Sider } = Layout;
 
@@ -31,7 +32,10 @@ export default function LeftMenuPanel() {
 
   return (
     <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
-      <div className="logo" style={{ height: 60 }} />
+      <div className={styles.logo}>
+        <img src={`${process.env.PUBLIC_URL}/logo.svg`} />
+        {!collapsed && <span>Smart Systems</span>}
+      </div>
       <Menu theme="dark" mode="inline" selectedKeys={[activeMenu]}>
         {menu.map(({ id, icon, label, route }) => (
           <Menu.Item key={id} icon={icon}>

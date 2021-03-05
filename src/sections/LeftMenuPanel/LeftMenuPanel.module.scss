@@ -1,7 +1,22 @@
+@import 'variables';
+
 .logo {
-  height: 32px;
-  margin: 16px;
-  background: rgba(255, 255, 255, 0.3);
+  height: 60px;
+  color: $white;
+  display: flex;
+  font-size: 16px;
+  font-weight: 600;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  span {
+    margin-left: 12px;
+  }
+  img {
+    display: inline-block;
+    height: 32px;
+    vertical-align: middle;
+  }
 }
 
 [data-theme='dark'] {

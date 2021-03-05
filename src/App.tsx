@@ -12,7 +12,7 @@ const redirects = ['/', '/dashboard'];
 function App() {
   const auth = useCognito();
   return (
-    <>
+    <div className="wrapApp">
       {auth.status !== STATUS.PENDING ? (
         <AuthContext.Provider value={auth}>
           <Router>
@@ -35,7 +35,7 @@ function App() {
         // spinner should be
         <div>loading</div>
       )}
-    </>
+    </div>
   );
 }
 // withAuthenticator temporary before we will use custom login form

@@ -7,18 +7,17 @@ import Highcharts from 'highcharts/highstock';
 import { getChartConfig } from './getChartConfig';
 import { Chart, Series } from 'highcharts';
 
-import styles from './LineChart.module.scss';
+import styles from './ColumnChart.module.scss';
 
 HighchartsMore(Highcharts);
 // Highcharts.setOptions(styleOptions);
 
-interface LineChartProps {
+interface ColumnChartProps {
   data?: number[][];
 }
 
-export default function LineChart({ data }: LineChartProps) {
-  const intervalFunction = useRef<NodeJS.Timeout>();
-
+export default function ColumnChart({ data }: ColumnChartProps) {
+  const options = useMemo(() => getChartConfig(), []);
   const wrapRef = useRef<HTMLDivElement>(null);
 
   const chartRef = useRef<{ chart: Chart; container: RefObject<HTMLDivElement> }>(null);
@@ -27,23 +26,10 @@ export default function LineChart({ data }: LineChartProps) {
       if (wrapRef.current && chartRef.current) {
         const height = wrapRef.current.offsetHeight;
         const width = wrapRef.current.offsetWidth;
-        chartRef.current?.chart.setSize(width, height);
+        chartRef.current.chart.setSize(width, height);
       }
     }, 0);
   }, [wrapRef]);
-  const onLoad = useCallback((series: Series) => {
-    intervalFunction.current = setInterval(() => {
-      const x = new Date().getTime(); // current time
-      const y = Math.round(Math.random() * 100);
-      series.addPoint([x, y]);
-    }, 1000);
-  }, []);
-
-  useEffect(() => {
-    return () => clearInterval(intervalFunction.current as NodeJS.Timeout);
-  });
-
-  const options = useMemo(() => getChartConfig(onLoad), [onLoad]);
 
   return (
     <div className={styles.root} ref={wrapRef}>
