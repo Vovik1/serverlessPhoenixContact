@@ -3,9 +3,7 @@ import { SeriesOptionsType, Series } from 'highcharts';
 import { AreaChartTypes, ChartConfigOptions } from '../types';
 
 export const getChartConfig = (type?: AreaChartTypes): ChartConfigOptions => {
-  console.log(type);
   const color = type ? AREA_CHART_COLOR[type] : undefined;
-  console.log(color);
   const series = [
     {
       type: 'area',
@@ -37,8 +35,6 @@ export const getChartConfig = (type?: AreaChartTypes): ChartConfigOptions => {
       enabled: false,
     },
     chart: {
-      // width: 320,
-      // height: 70,
       zoomType: undefined,
     },
     xAxis: {
