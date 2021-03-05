@@ -22,9 +22,9 @@ const Dynamo = {
     },
 
     async write(data, TableName) {
-        if (!data.ID) {
-            throw Error('no ID on the data');
-        }
+        // if (!data.ID) {
+        //     throw Error('no ID on the data');
+        // }
 
         const params = {
             TableName,
@@ -38,6 +38,17 @@ const Dynamo = {
         }
 
         return data;
+    },
+
+    async queryData(params) {
+
+        const res = await documentClient.query(params).promise()
+
+
+        console.log("Response", res);
+
+        return res;
+
     },
 
     async delete(ID, TableName) {

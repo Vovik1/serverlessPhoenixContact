@@ -6,7 +6,6 @@ provider:
   runtime: nodejs12.x
   profile: serverlessUser
   environment:
-    tableName: ${self:custom.tableName}
     PLC_TABLE: ${self:custom.PLC_TABLE}
   apiGateway: {
     shouldStartNameWithService: true
@@ -22,12 +21,10 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      # Resource: arn:aws:dynamodb:eu-central-1:114100681027:table/myPLC
       Resource: '*'
   
 custom:
-    PLC_TABLE: myPLC
-    tableName: WebsocketUsers
+    PLC_TABLE: PLCNextTable
 
 functions:
   app:
@@ -41,53 +38,13 @@ functions:
           path: /{proxy+}
           method: any
           cors: true 
-  myIoT:
-    handler: myIoT.handler
+  plcIoT:
+    handler: IotCoreRules/plcNextRule.handler
     events:
       - iot:
-          name: 'myIotEvent'
-          sql: "SELECT * FROM 'MyPLCNext/temperature'"
-          description: 'My IoT Event Description'
-  postData:
-    handler: postData.handler
-    events:
-      - http:
-          path: add-temerature/{ID}
-          method: POST
-          cors: true
-  websocket-connect:
-    handler: websockets/connect.handler
-    events:
-      - websocket:
-          route: $connect
-  websocket-disconnect:
-    handler: websockets/disconnect.handler
-    events:
-      - websocket:
-          route: $disconnect
-  websocket-default:
-    handler: websockets/default.handler
-    events:
-      - websocket:
-          route: $default
-  websocket-message:
-    handler: websockets/message.handler
-    events:
-      - websocket:
-          route: message
+          name: 'PLCEvent'
+          sql: "SELECT * FROM 'MyPLCNext'"
+          description: 'Get a data set from PLCNext'
 
-resources:
-  Resources:
-    WebsocketUserTable:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        TableName: ${self:custom.tableName}
-        AttributeDefinitions:
-          - AttributeName: ID
-            AttributeType: S
-        KeySchema:
-          - AttributeName: ID
-            KeyType: HASH
-        BillingMode: PAY_PER_REQUEST
 
           

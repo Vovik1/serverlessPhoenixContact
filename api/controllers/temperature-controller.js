@@ -1,35 +1,29 @@
 const AWS = require('aws-sdk');
 const PLC_TABLE = process.env.PLC_TABLE;
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
+const Dynamo = require('../../common/Dynamo');
 
-function getAll(req, res) {
-    console.log(req)
+async function getAll(req, res) {
     const params = {
         TableName: PLC_TABLE,
-        KeyConditionExpression: "#tmp = :yyyy",
+        KeyConditionExpression: "plc_id = :id and #tmp between :t1 and :t2",
         ExpressionAttributeNames: {
             "#tmp": "timestamp"
         },
         ExpressionAttributeValues: {
-            ":yyyy": 1610011536319
+            ":id": '4',
+            ":t1": "2021-03-04T16:57:50.204Z",
+            ":t2": "2021-03-04T17:08:19.495Z"
         }
     }
 
-    dynamoDb.query(params, (error, data) => {
-        if (error) {
-            console.log(error);
-            res.status(400).json({ error: 'Could not get user' });
-        } else {
-            console.log("Query succeed");
-            const values = data.Items.map((item) => {
-                return {
-                    time: item.timestamp,
-                    temperature: item.temperature
-                }
-            })
-            res.status(200).json(values);
-        }
-    });
+    try {
+        const result = await Dynamo.queryData(params)
+        res.json(result);
+    }
+    catch (err) {
+        res.json(err);
+    }
 }
+
 
 module.exports = { getAll }
