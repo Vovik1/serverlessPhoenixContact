@@ -1,0 +1,40 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:react-hooks/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "plugins": ["react", "@typescript-eslint", "jest"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "rules": {
+    "@typescript-eslint/explicit-function-return-type": 0,
+    "@typescript-eslint/explicit-module-boundary-types": 0,
+    "@typescript-eslint/no-floating-promises": 0,
+    "no-duplicate-imports": "error",
+    "no-console": "warn",
+    "no-debugger": "warn"
+  },
+  "overrides": [
+    {
+      // Disabling some rules in tests files
+      "files": ["src/**/*.test*"],
+      "rules": {
+        "@typescript-eslint/no-non-null-assertion": 0,
+        "@typescript-eslint/no-explicit-any": 0,
+        "@typescript-eslint/no-floating-promises": 0,
+        "@typescript-eslint/no-unsafe-call": 0
+      }
+    }
+  ]
+}
