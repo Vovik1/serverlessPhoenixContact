@@ -1,5 +1,5 @@
 import { SeriesOptionsType, Series } from 'highcharts';
-import { ChartConfigOptions } from './types';
+import { ChartConfigOptions } from '../types';
 
 export const getChartConfig = (onLoad: (series: Series) => void): ChartConfigOptions => {
   const series = [
@@ -31,7 +31,6 @@ export const getChartConfig = (onLoad: (series: Series) => void): ChartConfigOpt
       //   enabled: false,
     },
     chart: {
-      width: 800,
       zoomType: 'xy',
       events: {
         load: function () {

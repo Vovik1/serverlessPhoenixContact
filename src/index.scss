@@ -13,6 +13,7 @@ html {
 .app {
   margin: 0;
   font: 500 $fontSize/1.25 'Montserrat', 'Helvetica Neue', 'Helvetica', sans-serif;
+  color: $textColor;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -28,5 +29,6 @@ code {
   & > div {
     height: 100vh;
     overflow-y: auto;
+    width: 100%;
   }
 }
