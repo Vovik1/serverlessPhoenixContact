@@ -1,9 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from './Info.module.scss';
 import { observer } from 'mobx-react';
-import LineChart from 'components/Charts/LineChart/LineChart';
-import { outputStore as store } from 'stores';
-import { Card, Content, Breadcrumb, Area, ColumnChart } from 'components';
+import { Card, Area, ColumnChart } from 'components';
 import { AreaChartTypes } from 'components/Charts/types';
 import { Progress } from 'antd';
 

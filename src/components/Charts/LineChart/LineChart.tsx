@@ -1,4 +1,4 @@
-import React, { RefObject, useCallback, useEffect, useMemo, useRef } from 'react';
+import React, { RefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import HighchartsReact from 'highcharts-react-official';
 
 import HighchartsMore from 'highcharts/highcharts-more';
@@ -22,15 +22,21 @@ export default function LineChart({ data }: LineChartProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
 
   const chartRef = useRef<{ chart: Chart; container: RefObject<HTMLDivElement> }>(null);
+  //testing
   useEffect(() => {
-    setTimeout(() => {
-      if (wrapRef.current && chartRef.current) {
-        const height = wrapRef.current.offsetHeight;
-        const width = wrapRef.current.offsetWidth;
-        chartRef.current?.chart.setSize(width, height);
-      }
-    }, 0);
-  }, [wrapRef]);
+    function handleResize() {
+      setTimeout(() => {
+        chartRef.current?.chart.setSize(
+          wrapRef.current?.offsetWidth,
+          wrapRef.current?.offsetHeight
+        );
+      }, 0);
+    }
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const onLoad = useCallback((series: Series) => {
     intervalFunction.current = setInterval(() => {
       const x = new Date().getTime(); // current time
