@@ -1,9 +1,7 @@
 {
-  "homepage": "./",
   "name": "smart-system",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/",
   "dependencies": {
     "@ant-design/icons": "^4.4.0",
     "@ant-design/pro-layout": "6.14.0",
