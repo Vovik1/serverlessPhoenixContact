@@ -10,13 +10,21 @@ const breadcrumbLabels = ['Dashboard', 'Monitoring'];
 
 function Monitoring() {
   useEffect(() => {
-    store.load();
+    store.loadlastData();
+    store.loadControlledData();
+    const loadLastData = setInterval(() => {
+      store.loadlastData();
+      store.loadControlledData();
+    }, 60000);
+    return () => clearInterval(loadLastData);
   }, []);
+
+  const { controlledData, lastData } = store;
 
   return (
     <Content>
       <Breadcrumb labels={breadcrumbLabels} />
-      <Info />
+      {lastData.length > 0 && controlledData && <Info controlledData={controlledData} />}
       <Card className={styles.lineChartCard}>
         <LineChart />
       </Card>

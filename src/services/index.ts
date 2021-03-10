@@ -1,10 +1,7 @@
 import { createMocks } from './initMocks';
 import output from './output/outputServices';
-import initAxios from './serviceInstance';
 
-createMocks();
-
-initAxios();
+// createMocks();
 
 const api = {
   output,

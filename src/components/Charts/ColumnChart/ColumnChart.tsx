@@ -8,16 +8,17 @@ import { getChartConfig } from './getChartConfig';
 import { Chart, Series } from 'highcharts';
 
 import styles from './ColumnChart.module.scss';
+import { ChartData } from '../types';
 
 HighchartsMore(Highcharts);
 // Highcharts.setOptions(styleOptions);
 
 interface ColumnChartProps {
-  data?: number[][];
+  data: ChartData;
 }
 
 export default function ColumnChart({ data }: ColumnChartProps) {
-  const options = useMemo(() => getChartConfig(), []);
+  const options = useMemo(() => getChartConfig(data), [data]);
   const wrapRef = useRef<HTMLDivElement>(null);
 
   const chartRef = useRef<{ chart: Chart; container: RefObject<HTMLDivElement> }>(null);

@@ -1,11 +1,12 @@
 import { SeriesOptionsType, Series } from 'highcharts';
-import { ChartConfigOptions } from '../types';
+import { ChartConfigOptions, ChartData } from '../types';
 
-export const getChartConfig = (): ChartConfigOptions => {
+export const getChartConfig = (data: ChartData): ChartConfigOptions => {
   const series = [
     {
       type: 'column',
-      data: [11, 17, 13, 15, 15, 26, 27, 30, 22, 25, 24, 23, 26, 29, 33, 34],
+      name: 'Температура',
+      data: data.temperature,
     } as SeriesOptionsType,
   ];
 
@@ -39,10 +40,11 @@ export const getChartConfig = (): ChartConfigOptions => {
     xAxis: {
       type: 'datetime',
       visible: false,
+      categories: data.timestamp,
     },
-
     yAxis: {
       visible: false,
+      type: 'logarithmic',
     },
     series,
   };

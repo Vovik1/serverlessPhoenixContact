@@ -8,18 +8,18 @@ import { getChartConfig } from './getChartConfig';
 import { Chart, Series } from 'highcharts';
 
 import styles from './Area.module.scss';
-import { AreaChartTypes } from '../types';
+import { ChartData, AreaChartTypes } from '../types';
 
 HighchartsMore(Highcharts);
 // Highcharts.setOptions(styleOptions);
 
 interface AreaProps {
-  data?: number[][];
-  type?: AreaChartTypes;
+  data: ChartData;
+  type: AreaChartTypes;
 }
 
-export default function Area({ type }: AreaProps) {
-  const options = useMemo(() => getChartConfig(type), [type]);
+export default function Area({ data, type }: AreaProps) {
+  const options = useMemo(() => getChartConfig(type, data), [type, data]);
   const wrapRef = useRef<HTMLDivElement>(null);
 
   const chartRef = useRef<{ chart: Chart; container: RefObject<HTMLDivElement> }>(null);
