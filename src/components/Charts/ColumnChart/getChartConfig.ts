@@ -1,7 +1,10 @@
-import { SeriesOptionsType, Series } from 'highcharts';
+import { SeriesOptionsType } from 'highcharts';
+import moment from 'moment';
 import { ChartConfigOptions, ChartData } from '../types';
 
 export const getChartConfig = (data: ChartData): ChartConfigOptions => {
+  // const seriesData = data.timestamp.map((item, index) => [item, data.temperature[index]]);
+
   const series = [
     {
       type: 'column',
@@ -9,6 +12,9 @@ export const getChartConfig = (data: ChartData): ChartConfigOptions => {
       data: data.temperature,
     } as SeriesOptionsType,
   ];
+
+  // will be fixed after api integration;
+  const test = data.timestamp.map((item) => moment(item).format('MM-dddd-yyyy HH:mm'));
 
   return {
     constructorType: 'chart',
@@ -40,7 +46,7 @@ export const getChartConfig = (data: ChartData): ChartConfigOptions => {
     xAxis: {
       type: 'datetime',
       visible: false,
-      categories: data.timestamp,
+      categories: test,
     },
     yAxis: {
       visible: false,

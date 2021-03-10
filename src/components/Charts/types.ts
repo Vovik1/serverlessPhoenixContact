@@ -8,6 +8,6 @@ export enum AreaChartTypes {
 }
 
 export interface ChartData {
-  timestamp: string[];
+  timestamp: number[];
   temperature: number[];
 }

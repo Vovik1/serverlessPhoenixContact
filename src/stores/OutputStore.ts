@@ -1,11 +1,7 @@
 import { POPOVER_MOCK_DATA } from 'commonConstants';
 import { makeAutoObservable, runInAction } from 'mobx';
-import {
-  ErrorData,
-  OutputControlledData,
-  OutputData,
-  OutputDataResponse,
-} from 'services/output/OutputTypes';
+import moment from 'moment';
+import { ErrorData, OutputControlledData, OutputDataResponse } from 'services/output/OutputTypes';
 import api from '../services';
 
 export class OutputStore {
@@ -43,6 +39,12 @@ export class OutputStore {
     try {
       const initialData = await this.service.loadControlledData();
       runInAction(() => {
+        initialData.timestamp = initialData.timestamp
+          .reverse()
+          .map((item) => moment(item).valueOf());
+        initialData.tank_level.reverse();
+        initialData.heater_temperature.reverse();
+
         this.controlledData = initialData;
         this.isControlledDataLoaded = true;
       });

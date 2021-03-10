@@ -7,7 +7,6 @@ import { Progress } from 'antd';
 import { outputStore as store } from 'stores';
 import CardInfo from './CardInfo/CardInfo';
 import { OutputControlledData } from 'services/output/OutputTypes';
-import moment from 'moment';
 
 interface InfoProps {
   controlledData: OutputControlledData;
@@ -17,17 +16,12 @@ function Info({ controlledData }: InfoProps) {
   const lastData = store.lastData[0];
   const { HEATER_TEMPERATURE, TANK_LEVEL } = lastData.data;
 
-  // to remove after API update
-  const transformedTimestamp = controlledData.timestamp.map((item) =>
-    moment(item).format('MM-DD-YYYY HH:mm')
-  );
-
   const heaterData = useMemo(
     () => ({
-      timestamp: transformedTimestamp.slice(0, 20),
+      timestamp: controlledData.timestamp.slice(0, 20),
       temperature: controlledData.heater_temperature.slice(0, 20),
     }),
-    [controlledData.heater_temperature, transformedTimestamp]
+    [controlledData]
   );
 
   const options = useMemo(

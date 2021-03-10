@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import styles from './Monitoring.module.scss';
 import { observer } from 'mobx-react';
 import LineChart from 'components/Charts/LineChart/LineChart';

@@ -11,7 +11,7 @@ export interface OutputData {
 export interface OutputControlledData {
   heater_temperature: number[];
   tank_level: number[];
-  timestamp: string[];
+  timestamp: number[];
 }
 
 export interface ErrorData {

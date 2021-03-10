@@ -1,27 +1,29 @@
-import React, { RefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { RefObject, useEffect, useMemo, useRef } from 'react';
 import HighchartsReact from 'highcharts-react-official';
 
 import HighchartsMore from 'highcharts/highcharts-more';
 import Highcharts from 'highcharts/highstock';
 
 import { getChartConfig } from './getChartConfig';
-import { Chart, Series } from 'highcharts';
+import { Chart } from 'highcharts';
 
 import styles from './LineChart.module.scss';
+import { outputStore as store } from 'stores';
+import { observer } from 'mobx-react';
+import { toJS } from 'mobx';
 
 HighchartsMore(Highcharts);
 // Highcharts.setOptions(styleOptions);
 
-interface LineChartProps {
-  data?: number[][];
-}
-
-export default function LineChart({ data }: LineChartProps) {
-  const intervalFunction = useRef<NodeJS.Timeout>();
-
+function LineChart() {
   const wrapRef = useRef<HTMLDivElement>(null);
+  const heaterData = {
+    timestamp: store.controlledData?.timestamp || [],
+    temperature: store.controlledData?.heater_temperature || [],
+  };
 
   const chartRef = useRef<{ chart: Chart; container: RefObject<HTMLDivElement> }>(null);
+
   //testing
   useEffect(() => {
     function handleResize() {
@@ -37,19 +39,7 @@ export default function LineChart({ data }: LineChartProps) {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const onLoad = useCallback((series: Series) => {
-    intervalFunction.current = setInterval(() => {
-      const x = new Date().getTime(); // current time
-      const y = Math.round(Math.random() * 100);
-      series.addPoint([x, y]);
-    }, 1000);
-  }, []);
-
-  useEffect(() => {
-    return () => clearInterval(intervalFunction.current as NodeJS.Timeout);
-  });
-
-  const options = useMemo(() => getChartConfig(onLoad), [onLoad]);
+  const options = getChartConfig(toJS(heaterData));
 
   return (
     <div className={styles.root} ref={wrapRef}>
@@ -62,3 +52,5 @@ export default function LineChart({ data }: LineChartProps) {
     </div>
   );
 }
+
+export default observer(LineChart);
