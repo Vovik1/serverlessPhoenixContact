@@ -1,9 +1,13 @@
-import { OutputData } from './OutputTypes';
+import { OutputControlledData, OutputDataResponse } from './OutputTypes';
 import axios from 'axios';
 
-function loadOutput() {
-  return axios.get<OutputData[]>(`/data`).then((payload) => payload.data);
+function loadlastData() {
+  return axios.get<OutputDataResponse[]>(`/api/temperature/last`).then((payload) => payload.data);
 }
 
-const outputServices = { loadOutput };
+function loadControlledData() {
+  return axios.get<OutputControlledData>(`/api/temperature/latest`).then((payload) => payload.data);
+}
+
+const outputServices = { loadlastData, loadControlledData };
 export default outputServices;

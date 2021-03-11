@@ -1,21 +1,14 @@
-import { SeriesOptionsType, Series } from 'highcharts';
-import { ChartConfigOptions } from '../types';
+import { SeriesOptionsType } from 'highcharts';
+import { ChartConfigOptions, ChartData } from '../types';
 
-export const getChartConfig = (onLoad: (series: Series) => void): ChartConfigOptions => {
+export const getChartConfig = (data: ChartData): ChartConfigOptions => {
+  const seriesData = data.timestamp.map((item, index) => [item, data.temperature[index]]);
+
   const series = [
     {
       type: 'line',
       name: 'Temperature',
-      data: (function () {
-        const data = [];
-        const time = new Date().getTime();
-        let i;
-
-        for (i = -999; i <= 0; i += 1) {
-          data.push([time + i * 1000, Math.round(Math.random() * 100)]);
-        }
-        return data;
-      })(),
+      data: seriesData,
     } as SeriesOptionsType,
   ];
 
@@ -32,12 +25,6 @@ export const getChartConfig = (onLoad: (series: Series) => void): ChartConfigOpt
     },
     chart: {
       zoomType: 'xy',
-      events: {
-        load: function () {
-          const series = this.series[0];
-          onLoad(series);
-        },
-      },
     },
     xAxis: {
       type: 'datetime',
@@ -45,6 +32,7 @@ export const getChartConfig = (onLoad: (series: Series) => void): ChartConfigOpt
 
     yAxis: {
       opposite: false,
+      type: 'logarithmic',
       title: {
         text: 'Temperature',
       },

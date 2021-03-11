@@ -42,7 +42,7 @@ function Header() {
               </List.Item>
             )}
           />
-          {errorCount.length > 0 && (
+          {outputStore.errorData.length > 0 && (
             <div className={styles.footer}>
               <div onClick={() => outputStore.setResolvedErrors(undefined, true)}>Очистити всі</div>
             </div>

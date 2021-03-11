@@ -1,26 +1,56 @@
 import { POPOVER_MOCK_DATA } from 'commonConstants';
 import { makeAutoObservable, runInAction } from 'mobx';
-import { ErrorData, OutputData } from 'services/output/OutputTypes';
+import moment from 'moment';
+import { ErrorData, OutputControlledData, OutputDataResponse } from 'services/output/OutputTypes';
 import api from '../services';
 
 export class OutputStore {
   service: typeof api.output;
-  data: OutputData[] = [];
+  lastData: OutputDataResponse[] = [];
+  controlledData: OutputControlledData | undefined;
   errorData: ErrorData[] = POPOVER_MOCK_DATA;
+  isLastDataLoaded = false;
+  isControlledDataLoaded = false;
 
   constructor(OutputService: typeof api.output) {
     this.service = OutputService;
     makeAutoObservable(this);
   }
 
-  async load() {
+  async loadlastData() {
+    runInAction(() => {
+      this.isLastDataLoaded = false;
+    });
     try {
-      const initialData = await this.service.loadOutput();
+      const initialData = await this.service.loadlastData();
       runInAction(() => {
-        this.data = initialData;
+        this.lastData = initialData;
+        this.isLastDataLoaded = true;
       });
     } catch {
       console.log('error');
+      this.isLastDataLoaded = false;
+    }
+  }
+  async loadControlledData() {
+    runInAction(() => {
+      this.isControlledDataLoaded = false;
+    });
+    try {
+      const initialData = await this.service.loadControlledData();
+      runInAction(() => {
+        initialData.timestamp = initialData.timestamp
+          .reverse()
+          .map((item) => moment(item).valueOf());
+        initialData.tank_level.reverse();
+        initialData.heater_temperature.reverse();
+
+        this.controlledData = initialData;
+        this.isControlledDataLoaded = true;
+      });
+    } catch {
+      console.log('error');
+      this.isControlledDataLoaded = false;
     }
   }
 

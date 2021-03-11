@@ -1,16 +1,23 @@
 import { AREA_CHART_COLOR } from 'commonConstants';
-import { SeriesOptionsType, Series } from 'highcharts';
-import { AreaChartTypes, ChartConfigOptions } from '../types';
+import { SeriesOptionsType } from 'highcharts';
+import moment from 'moment';
+import { AreaChartTypes, ChartConfigOptions, ChartData } from '../types';
 
-export const getChartConfig = (type?: AreaChartTypes): ChartConfigOptions => {
-  const color = type ? AREA_CHART_COLOR[type] : undefined;
+export const getChartConfig = (type: AreaChartTypes, data: ChartData): ChartConfigOptions => {
+  const color = AREA_CHART_COLOR[type];
+
+  // const seriesData = data.timestamp.reverse().map((item, index) => [item, data.temperature[index]]);
+
   const series = [
     {
       type: 'area',
-      name: 'Temperature',
-      data: [11, 17, 13, 15, 15, 26, 27],
+      name: 'Температура',
+      data: data.temperature,
     } as SeriesOptionsType,
   ];
+
+  //will be fixed after api int;
+  const test = data.timestamp.map((item) => moment(item).format('MM-dddd-yyyy HH:mm'));
 
   return {
     constructorType: 'chart',
@@ -23,12 +30,13 @@ export const getChartConfig = (type?: AreaChartTypes): ChartConfigOptions => {
     title: {
       text: undefined,
     },
-    // rangeSelector: {
-    //     enabled: false,
-    // },
+
     plotOptions: {
       area: {
         color: color,
+        marker: {
+          enabled: false,
+        },
       },
     },
     legend: {
@@ -40,10 +48,11 @@ export const getChartConfig = (type?: AreaChartTypes): ChartConfigOptions => {
     xAxis: {
       type: 'datetime',
       visible: false,
+      categories: test,
     },
-
     yAxis: {
       visible: false,
+      type: 'logarithmic',
     },
     series,
   };

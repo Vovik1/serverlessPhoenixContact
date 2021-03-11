@@ -6,3 +6,8 @@ export enum AreaChartTypes {
   PRESSURE = 'pressure',
   LEVEL = 'level',
 }
+
+export interface ChartData {
+  timestamp: number[];
+  temperature: number[];
+}
