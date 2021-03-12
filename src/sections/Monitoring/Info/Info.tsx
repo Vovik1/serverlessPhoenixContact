@@ -23,6 +23,14 @@ function Info({ controlledData }: InfoProps) {
     [controlledData]
   );
 
+  const tankData = useMemo(
+    () => ({
+      timestamp: controlledData.timestamp.slice(0, 20),
+      temperature: controlledData.tank_level.slice(0, 20),
+    }),
+    [controlledData]
+  );
+
   return (
     <div className={styles.wrap}>
       <Card className={styles.card}>
@@ -43,7 +51,7 @@ function Info({ controlledData }: InfoProps) {
       <Card className={styles.card}>
         <div className={styles.title}>Температура</div>
         <div className={styles.data}>{TANK_LEVEL.toFixed(3)} ℃</div>
-        <ColumnChart data={heaterData} />
+        <ColumnChart data={tankData} />
       </Card>
     </div>
   );
