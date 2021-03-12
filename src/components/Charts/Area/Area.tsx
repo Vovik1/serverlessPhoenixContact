@@ -1,11 +1,11 @@
-import React, { RefObject, useCallback, useEffect, useMemo, useRef } from 'react';
+import React, { RefObject, useEffect, useMemo, useRef } from 'react';
 import HighchartsReact from 'highcharts-react-official';
 
 import HighchartsMore from 'highcharts/highcharts-more';
 import Highcharts from 'highcharts/highstock';
 
 import { getChartConfig } from './getChartConfig';
-import { Chart, Series } from 'highcharts';
+import { Chart } from 'highcharts';
 
 import styles from './Area.module.scss';
 import { ChartData, AreaChartTypes } from '../types';
@@ -18,7 +18,7 @@ interface AreaProps {
   type: AreaChartTypes;
 }
 
-export default function Area({ data, type }: AreaProps) {
+function Area({ data, type }: AreaProps) {
   const options = useMemo(() => getChartConfig(type, data), [type, data]);
   const wrapRef = useRef<HTMLDivElement>(null);
 
@@ -45,3 +45,5 @@ export default function Area({ data, type }: AreaProps) {
     </div>
   );
 }
+
+export default React.memo(Area);
