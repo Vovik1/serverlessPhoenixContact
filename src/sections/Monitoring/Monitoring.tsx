@@ -3,7 +3,7 @@ import styles from './Monitoring.module.scss';
 import { observer } from 'mobx-react';
 import LineChart from 'components/Charts/LineChart/LineChart';
 import { outputStore as store } from 'stores';
-import { Card, Content, Breadcrumb, Spinner } from 'components';
+import { Card, Content, Breadcrumb, Spinner, ObjectImages } from 'components';
 import Info from './Info/Info';
 
 const breadcrumbLabels = ['Dashboard', 'Monitoring'];
@@ -22,13 +22,15 @@ function Monitoring() {
   const { controlledData, lastData, isControlledDataLoaded, isLastDataLoaded } = store;
 
   const isDataLoaded = isControlledDataLoaded && isLastDataLoaded;
-
   return (
     <>
       {isDataLoaded ? (
         <Content>
           <Breadcrumb labels={breadcrumbLabels} />
           {lastData.length > 0 && controlledData && <Info controlledData={controlledData} />}
+          <Card className={styles.imagesCard}>
+            <ObjectImages imgSrc={`${process.env.PUBLIC_URL}/Tank.svg`} objectData={lastData[0]} />
+          </Card>
           <Card className={styles.lineChartCard}>
             <LineChart />
           </Card>
