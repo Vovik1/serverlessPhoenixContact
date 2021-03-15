@@ -6,8 +6,9 @@ export const getChartConfig = (data: ChartData): ChartConfigOptions => {
 
   const series = [
     {
+      color: '#1890ff',
       type: 'line',
-      name: 'Temperature',
+      name: 'Температура',
       data: seriesData,
     } as SeriesOptionsType,
   ];
@@ -23,6 +24,19 @@ export const getChartConfig = (data: ChartData): ChartConfigOptions => {
     rangeSelector: {
       //   enabled: false,
     },
+    scrollbar: {
+      enabled: false,
+    },
+    navigator: {
+      adaptToUpdatedData: true,
+      height: 26,
+      maskFill: 'rgba(224,231,246, 0.4)',
+      xAxis: {
+        labels: {
+          enabled: false,
+        },
+      },
+    },
     chart: {
       zoomType: 'xy',
     },
@@ -32,9 +46,10 @@ export const getChartConfig = (data: ChartData): ChartConfigOptions => {
 
     yAxis: {
       opposite: false,
-      type: 'logarithmic',
+      // type: 'logarithmic',
+      gridLineDashStyle: 'Dash',
       title: {
-        text: 'Temperature',
+        text: 'Температура',
       },
     },
     series,
