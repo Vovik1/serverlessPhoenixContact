@@ -15,7 +15,7 @@ function Monitoring() {
     const loadLastData = setInterval(() => {
       store.loadlastData();
       store.loadControlledData();
-    }, 60000);
+    }, 5000);
     return () => clearInterval(loadLastData);
   }, []);
 
