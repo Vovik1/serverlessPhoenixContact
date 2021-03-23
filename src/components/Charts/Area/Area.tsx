@@ -1,14 +1,14 @@
-import React, { RefObject, useCallback, useEffect, useMemo, useRef } from 'react';
+import React, { useMemo, useRef } from 'react';
 import HighchartsReact from 'highcharts-react-official';
 
 import HighchartsMore from 'highcharts/highcharts-more';
 import Highcharts from 'highcharts/highstock';
 
 import { getChartConfig } from './getChartConfig';
-import { Chart, Series } from 'highcharts';
 
 import styles from './Area.module.scss';
-import { ChartData, AreaChartTypes } from '../types';
+import { ChartData, AreaChartTypes, ChartRef } from '../types';
+import { useSetChartSize } from 'hooks';
 
 HighchartsMore(Highcharts);
 // Highcharts.setOptions(styleOptions);
@@ -18,20 +18,11 @@ interface AreaProps {
   type: AreaChartTypes;
 }
 
-export default function Area({ data, type }: AreaProps) {
+function Area({ data, type }: AreaProps) {
   const options = useMemo(() => getChartConfig(type, data), [type, data]);
-  const wrapRef = useRef<HTMLDivElement>(null);
+  const chartRef = useRef<ChartRef>(null);
 
-  const chartRef = useRef<{ chart: Chart; container: RefObject<HTMLDivElement> }>(null);
-  useEffect(() => {
-    setTimeout(() => {
-      if (wrapRef.current && chartRef.current) {
-        const height = wrapRef.current.offsetHeight;
-        const width = wrapRef.current.offsetWidth;
-        chartRef.current?.chart.setSize(width, height);
-      }
-    }, 0);
-  }, [wrapRef]);
+  const wrapRef = useSetChartSize(chartRef);
 
   return (
     <div className={styles.root} ref={wrapRef}>
@@ -45,3 +36,5 @@ export default function Area({ data, type }: AreaProps) {
     </div>
   );
 }
+
+export default React.memo(Area);

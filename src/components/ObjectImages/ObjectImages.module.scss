@@ -1,0 +1,22 @@
+.wrap {
+  display: flex;
+  width: 100%;
+  position: relative;
+  .dataBlock {
+    position: absolute;
+    top: 28%;
+    font-size: 15px;
+  }
+}
+.img {
+  width: 100%;
+  max-width: 600px;
+  height: 100%;
+}
+.changed {
+  :global {
+    .test {
+      fill: red;
+    }
+  }
+}

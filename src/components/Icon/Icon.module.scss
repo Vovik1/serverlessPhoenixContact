@@ -1,0 +1,30 @@
+@import 'variables.scss';
+
+.sm {
+  font-size: $fontSize;
+}
+
+.md {
+  font-size: $fontSizeMd;
+}
+
+.mdLg {
+  font-size: 22px;
+}
+
+.lg {
+  font-size: 26px;
+}
+
+.disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.inherit {
+  font-size: inherit;
+}
+
+.white {
+  color: initial;
+}

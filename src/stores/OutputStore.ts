@@ -18,9 +18,6 @@ export class OutputStore {
   }
 
   async loadlastData() {
-    runInAction(() => {
-      this.isLastDataLoaded = false;
-    });
     try {
       const initialData = await this.service.loadlastData();
       runInAction(() => {
@@ -33,9 +30,6 @@ export class OutputStore {
     }
   }
   async loadControlledData() {
-    runInAction(() => {
-      this.isControlledDataLoaded = false;
-    });
     try {
       const initialData = await this.service.loadControlledData();
       runInAction(() => {

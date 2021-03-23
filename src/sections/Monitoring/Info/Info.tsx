@@ -1,11 +1,10 @@
 import React, { useMemo } from 'react';
 import styles from './Info.module.scss';
 import { observer } from 'mobx-react';
-import { Area, ColumnChart } from 'components';
+import { Area, Card, ColumnChart } from 'components';
 import { AreaChartTypes } from 'components/Charts/types';
 import { Progress } from 'antd';
 import { outputStore as store } from 'stores';
-import CardInfo from './CardInfo/CardInfo';
 import { OutputControlledData } from 'services/output/OutputTypes';
 
 interface InfoProps {
@@ -24,33 +23,38 @@ function Info({ controlledData }: InfoProps) {
     [controlledData]
   );
 
-  const options = useMemo(
-    () => [
-      {
-        title: 'Температура',
-        value: `${HEATER_TEMPERATURE.toFixed(3)} ℃`,
-        children: <Area data={heaterData} type={AreaChartTypes.LEVEL} />,
-      },
-      {
-        title: 'Рівень',
-        value: '40 М',
-        children: <Progress className={styles.progress} percent={40} showInfo={false} />,
-      },
-      {
-        title: 'Тиск',
-        value: '7 кгс/см²',
-        children: <Area data={heaterData} type={AreaChartTypes.PRESSURE} />,
-      },
-      {
-        title: 'Температура',
-        value: `${TANK_LEVEL.toFixed(3)} ℃`,
-        children: <ColumnChart data={heaterData} />,
-      },
-    ],
-    [HEATER_TEMPERATURE, TANK_LEVEL, heaterData]
+  const tankData = useMemo(
+    () => ({
+      timestamp: controlledData.timestamp.slice(0, 20),
+      temperature: controlledData.tank_level.slice(0, 20),
+    }),
+    [controlledData]
   );
 
-  return <CardInfo options={options} />;
+  return (
+    <div className={styles.wrap}>
+      <Card className={styles.card}>
+        <div className={styles.title}>Температура</div>
+        <div className={styles.data}>{HEATER_TEMPERATURE.toFixed(3)} ℃</div>
+        <Area data={heaterData} type={AreaChartTypes.LEVEL} />
+      </Card>
+      <Card className={styles.card}>
+        <div className={styles.title}>Рівень</div>
+        <div className={styles.data}>40 М</div>
+        <Progress className={styles.progress} percent={40} showInfo={false} />
+      </Card>
+      <Card className={styles.card}>
+        <div className={styles.title}>Тиск</div>
+        <div className={styles.data}>7 кгс/см²</div>
+        <Area data={heaterData} type={AreaChartTypes.PRESSURE} />
+      </Card>
+      <Card className={styles.card}>
+        <div className={styles.title}>Температура</div>
+        <div className={styles.data}>{TANK_LEVEL.toFixed(3)} ℃</div>
+        <ColumnChart data={tankData} />
+      </Card>
+    </div>
+  );
 }
 
 export default observer(Info);

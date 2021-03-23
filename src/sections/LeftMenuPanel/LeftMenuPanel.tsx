@@ -1,22 +1,22 @@
 import React, { useCallback, useState } from 'react';
 import { Layout, Menu } from 'antd';
-import { DesktopOutlined, BarChartOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 import { Link, useLocation } from 'react-router-dom';
 import styles from './LeftMenuPanel.module.scss';
+import { Icon } from 'components';
 
 const { Sider } = Layout;
 
 const menu = [
   {
     id: 1,
-    icon: <DesktopOutlined />,
+    icon: <Icon type="DesktopOutlined" />,
     label: 'Monitoring',
     route: '/dashboard/monitoring',
   },
   {
     id: 2,
-    icon: <BarChartOutlined />,
+    icon: <Icon type="BarChartOutlined" />,
     label: 'Analysis',
     route: '/dashboard/analysis',
   },
@@ -32,7 +32,7 @@ export default function LeftMenuPanel() {
 
   return (
     <Sider
-      trigger={<MenuUnfoldOutlined width="40" height="40" />}
+      trigger={<Icon type="MenuUnfoldOutlined" className={styles.menuIcon} />}
       collapsible
       collapsed={collapsed}
       onCollapse={onCollapse}

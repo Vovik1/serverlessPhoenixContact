@@ -53,6 +53,7 @@ export const getChartConfig = (type: AreaChartTypes, data: ChartData): ChartConf
     yAxis: {
       visible: false,
       type: 'logarithmic',
+      minorTickInterval: 'auto',
     },
     series,
   };

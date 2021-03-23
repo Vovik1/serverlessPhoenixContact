@@ -1,5 +1,45 @@
+@import 'variables';
+
 .progress {
   width: 100%;
   margin-top: 40px;
   padding: 0px 15px;
+}
+
+.wrap {
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  display: inline-flex;
+  flex-wrap: wrap;
+  padding-top: 20px;
+  margin: -20px 0 0 -15px;
+  width: calc(100% + 15px);
+  .card {
+    margin: 20px 0 0 15px;
+    padding: 20px;
+    height: 176px;
+    min-width: 250px;
+    width: 100%;
+    position: relative;
+    flex-basis: auto;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    .title {
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.45);
+    }
+    .data {
+      margin-top: 10px;
+      font-size: 30px;
+      line-height: 38px;
+    }
+    .data,
+    .title {
+      margin-left: 15px;
+      margin-right: 15px;
+    }
+  }
 }

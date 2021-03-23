@@ -3,8 +3,7 @@ import styles from './Header.module.scss';
 import { Header as AntdHeader } from 'antd/lib/layout/layout';
 import { AmplifySignOut } from '@aws-amplify/ui-react';
 import { Avatar, Badge, List } from 'antd';
-import { BellOutlined, NotificationOutlined } from '@ant-design/icons';
-import { Popover } from 'components';
+import { Icon, Popover } from 'components';
 import { outputStore } from 'stores';
 import cn from 'classnames';
 import { observer } from 'mobx-react';
@@ -24,7 +23,7 @@ function Header() {
             locale={{
               emptyText: (
                 <div className={styles.emptyTextWrap}>
-                  <NotificationOutlined className={styles.emptyIcon} />
+                  <Icon type="NotificationOutlined" className={styles.emptyIcon} />
                   <div>Немає помилок</div>
                 </div>
               ),
@@ -59,7 +58,7 @@ function Header() {
           <Popover content={renderContent()} visible={visiblePopover} onChange={setVisiblePopover}>
             <div className={cn(styles.badgeWrap, visiblePopover && styles.active)}>
               <Badge count={errorCount.length} className={styles.badge} offset={[5, -7]}>
-                <BellOutlined />
+                <Icon type="BellOutlined" />
               </Badge>
             </div>
           </Popover>

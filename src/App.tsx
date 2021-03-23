@@ -6,6 +6,7 @@ import { AuthContext, useCognito, STATUS } from 'hooks';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import PrivateRoute from 'routes/PrivateRoute';
 import { withAuthenticator } from '@aws-amplify/ui-react';
+import { Spinner } from 'components';
 
 const redirects = ['/', '/dashboard'];
 
@@ -32,9 +33,8 @@ function App() {
           </Router>
         </AuthContext.Provider>
       ) : (
-          // spinner should be
-          <div>loading</div>
-        )}
+        <Spinner size="large" fullscreen />
+      )}
     </div>
   );
 }

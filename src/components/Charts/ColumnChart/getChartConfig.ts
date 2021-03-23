@@ -13,7 +13,7 @@ export const getChartConfig = (data: ChartData): ChartConfigOptions => {
     } as SeriesOptionsType,
   ];
 
-  // will be fixed after api integration;
+  //will be fixed after api int;
   const test = data.timestamp.map((item) => moment(item).format('MM-dddd-yyyy HH:mm'));
 
   return {
@@ -39,8 +39,6 @@ export const getChartConfig = (data: ChartData): ChartConfigOptions => {
       enabled: false,
     },
     chart: {
-      width: 320,
-      height: 70,
       zoomType: undefined,
     },
     xAxis: {
@@ -51,6 +49,7 @@ export const getChartConfig = (data: ChartData): ChartConfigOptions => {
     yAxis: {
       visible: false,
       type: 'logarithmic',
+      minorTickInterval: 'auto',
     },
     series,
   };
