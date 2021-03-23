@@ -40,14 +40,14 @@ functions:
     events:
       - iot:
           name: 'PLCEvent'
-          sql: "SELECT * FROM 'MyPLCNext'"
+          sql: "SELECT * FROM 'OperationalParams'"
           description: 'Get a data set from PLCNext'
 
 plugins:
   - serverless-s3-sync
 
 custom:
-  PLC_TABLE: PLCNextTable
+  PLC_TABLE: PLC
   bucketName: smart-phoenix-systems-new
   s3Sync:
     - bucketName: ${self:custom.bucketName}
