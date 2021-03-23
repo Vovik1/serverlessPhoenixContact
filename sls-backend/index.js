@@ -19,15 +19,8 @@ app.use('/api', (req, res, next) => {
   next();
 });
 
+
 app.use(cors());
-
-/* const PLC_TABLE = process.env.PLC_TABLE;
-const dynamoDb = new AWS.DynamoDB.DocumentClient();*/
-
 app.use('/api', apiRouter);
-
-/*app.get('/', function (req, res) {
-  res.send('Hello World!')
-})*/
 
 module.exports.handler = serverless(app);
