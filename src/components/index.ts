@@ -6,6 +6,7 @@ import Popover from './Popover/Popover';
 import { Area, LineChart, ColumnChart } from './Charts';
 import Spinner from './Spinner/Spinner';
 import ObjectImages from './ObjectImages/ObjectImages';
+import Icon from './Icon/Icon';
 
 export {
   PageLayout,
@@ -18,4 +19,5 @@ export {
   Popover,
   Spinner,
   ObjectImages,
+  Icon,
 };

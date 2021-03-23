@@ -29,7 +29,7 @@ function Monitoring() {
           <Breadcrumb labels={breadcrumbLabels} />
           {lastData.length > 0 && controlledData && <Info controlledData={controlledData} />}
           <Card className={styles.imagesCard}>
-            <ObjectImages imgSrc={`${process.env.PUBLIC_URL}/Tank.svg`} objectData={lastData[0]} />
+            <ObjectImages objectData={lastData[0]} />
           </Card>
           <Card className={styles.lineChartCard}>
             <LineChart />
