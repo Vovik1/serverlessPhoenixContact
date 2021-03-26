@@ -8,40 +8,30 @@ const tableName = process.env.tableName;
 exports.handler = async event => {
     console.log('event', event);
 
-    if (!event.pathParameters || !event.pathParameters.ID) {
-        // failed without an ID
-        return Responses._400({ message: 'missing the ID from the path' });
-    }
+    // if (!event.pathParameters || !event.pathParameters.ID) {
+    //     // failed without an ID
+    //     return Responses._400({ message: 'missing the ID from the path' });
+    // }
 
-    let ID = event.pathParameters.ID;
-    const user = JSON.parse(event.body);
-    user.ID = ID;
+    // let ID = event.pathParameters.ID;
+    // const user = JSON.parse(event.body);
+    // user.ID = ID;
 
-    const newUser = await Dynamo.write(user, tableName).catch(err => {
-        console.log('error in dynamo write', err);
-        return null;
-    });
+    // const newUser = await Dynamo.write(user, tableName).catch(err => {
+    //     console.log('error in dynamo write', err);
+    //     return null;
+    // });
 
-    var params = {
-        topic: 'MyPLCNext',
-        payload: 'Hello there',
+    
+    const params = {
+        topic: 'writeOperationalParams',
+        payload: event.body,
         qos: 0
     };
-
-    const result = await iotdata.publish(params, function (err, data) {
-        if (err) {
-            console.log("error", err);
-        }
-        else {
-            console.log('Data', data)
-            console.log("Success, I guess.");
-            //context.succeed();
-        }
-    })
-
-    if (!newUser) {
-        return Responses._400({ message: 'Failed to write user by ID' });
-    }
-
-    return Responses._200({ newUser });
+    try{
+        const result = await iotdata.publish(params).promise();
+        return Responses._200({ message: result });
+    } catch (error) {
+        return Responses._400({message: error})
+    }    
 };

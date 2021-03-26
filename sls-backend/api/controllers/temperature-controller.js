@@ -39,7 +39,12 @@ async function getLatest(req, res) {
 
     try {
         const result = await Dynamo.queryData(params)
-        res.json(result.Items);
+        const {operationalData, plc_id, timestamp} = result.Items[0];
+        res.json({
+            operationalData:operationalData,
+            plc_id:plc_id,
+            timestamp:timestamp
+        });
     }
     catch (err) {
         res.json(err);
@@ -54,7 +59,7 @@ async function getTemperatureChartData(req, res) {
         ExpressionAttributeValues: {
             ":id": '1151412'
         },
-        ScanIndexForward: false,
+        ScanIndexForward: true,
         Limit: 30,
     }
 
@@ -63,25 +68,24 @@ async function getTemperatureChartData(req, res) {
         const data = result.Items.map((item) => {
             return {
                 timestamp: item.timestamp,
-                heater_temperature: item.data.HEATER_TEMPERATURE,
-                tank_level: item.data.TANK_LEVEL
+                heaterTemperature: item.operationalData.HEATER_TEMPERATURE,
+                tankTemperature: item.operationalData.TANK_TEMPERATURE
             }
         })
 
-        console.log("Data", data)
-        const converted_results = {
+        const convertedResults = {
             timestamp: [],
-            heater_temperature: [],
-            tank_level: [],
+            heaterTemperature: [],
+            tankTemperature: [],
         };
 
         for (let i = 0; i < data.length; i++) {
-            converted_results.timestamp.push(data[i].timestamp)
-            converted_results.heater_temperature.push(data[i].heater_temperature)
-            converted_results.tank_level.push(data[i].tank_level)
+            convertedResults.timestamp.push(data[i].timestamp)
+            convertedResults.heaterTemperature.push(data[i].heaterTemperature)
+            convertedResults.tankTemperature.push(data[i].tankTemperature)
         }
 
-        res.json(converted_results);
+        res.json(convertedResults);
     }
     catch (err) {
         res.json(err);
