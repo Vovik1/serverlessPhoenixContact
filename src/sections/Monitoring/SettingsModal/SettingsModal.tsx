@@ -37,6 +37,10 @@ const options = [
   },
 ];
 
+const DEFAULT_SETTINGS: Settings = {
+  remoteOnOff: false,
+};
+
 export default function SettingsModal({ lastData, saveSettings }: SettingsModalProps) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const { FILL_DRAIN_INT_TIME, HIGH_TEMP_AL_VALUE, HORN_BLINK_INT_TIME, SYSTEM_MODE } = lastData;
@@ -46,7 +50,7 @@ export default function SettingsModal({ lastData, saveSettings }: SettingsModalP
     [SettingsLabels.HORN_BLINK_INT_TIME]: HORN_BLINK_INT_TIME.toFixed(),
   };
   const [settings, setSettings] = useState<Settings>({
-    SYSTEM_MODE,
+    remoteOnOff: SYSTEM_MODE ? true : false,
   });
 
   // if more modals, move to store;
@@ -57,12 +61,12 @@ export default function SettingsModal({ lastData, saveSettings }: SettingsModalP
   const handleOk = useCallback(() => {
     setIsModalVisible(false);
     saveSettings(settings);
-    setSettings({});
+    setSettings({ ...DEFAULT_SETTINGS });
   }, [settings, saveSettings]);
 
   const handleCancel = useCallback(() => {
     setIsModalVisible(false);
-    setSettings({});
+    setSettings({ ...DEFAULT_SETTINGS });
   }, []);
 
   const handleInputChange = useCallback(
@@ -75,8 +79,7 @@ export default function SettingsModal({ lastData, saveSettings }: SettingsModalP
 
   const handleSwitchChange = useCallback(
     (checked: boolean) => {
-      const SYSTEM_MODE = checked ? 1 : 0;
-      setSettings({ ...settings, SYSTEM_MODE });
+      setSettings({ ...settings, remoteOnOff: checked });
     },
     [settings]
   );
@@ -102,11 +105,7 @@ export default function SettingsModal({ lastData, saveSettings }: SettingsModalP
             placeholder={placeholders[setting]}
           />
         ))}
-        <Switch
-          label="Викл/Вмк"
-          checked={settings.SYSTEM_MODE ? true : false}
-          onChange={handleSwitchChange}
-        />
+        <Switch label="Викл/Вмк" checked={settings.remoteOnOff} onChange={handleSwitchChange} />
       </Modal>
     </div>
   );

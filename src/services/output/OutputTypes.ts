@@ -29,7 +29,7 @@ export interface ErrorData {
 
 export interface Settings {
   FILL_DRAIN_INT_TIME?: number;
-  SYSTEM_MODE?: number;
+  remoteOnOff: boolean;
   HIGH_TEMP_AL_VALUE?: number;
   HORN_BLINK_INT_TIME?: number;
 }
