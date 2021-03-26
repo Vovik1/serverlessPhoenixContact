@@ -7,6 +7,9 @@ import { Area, LineChart, ColumnChart } from './Charts';
 import Spinner from './Spinner/Spinner';
 import ObjectImages from './ObjectImages/ObjectImages';
 import Icon from './Icon/Icon';
+import Modal from './Modal/Modal';
+import Input from './Input/Input';
+import Switch from './Switch/Switch';
 
 export {
   PageLayout,
@@ -20,4 +23,7 @@ export {
   Spinner,
   ObjectImages,
   Icon,
+  Modal,
+  Input,
+  Switch
 };

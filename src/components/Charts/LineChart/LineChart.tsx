@@ -19,7 +19,7 @@ HighchartsMore(Highcharts);
 function LineChart() {
   const heaterData = {
     timestamp: store.controlledData?.timestamp || [],
-    temperature: store.controlledData?.heater_temperature || [],
+    temperature: store.controlledData?.heaterTemperature || [],
   };
 
   const chartRef = useRef<ChartRef>(null);

@@ -1,0 +1,10 @@
+.settingsInputWrap {
+  padding-top: 10px;
+  &:first-child {
+    padding-top: 0px;
+  }
+}
+.settingsWrapper {
+  display: flex;
+  justify-content: flex-end;
+}

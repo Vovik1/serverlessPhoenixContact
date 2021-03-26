@@ -5,20 +5,20 @@ import { Area, Card, ColumnChart } from 'components';
 import { AreaChartTypes } from 'components/Charts/types';
 import { Progress } from 'antd';
 import { outputStore as store } from 'stores';
-import { OutputControlledData } from 'services/output/OutputTypes';
+import { OperationalData, OutputControlledData } from 'services/output/OutputTypes';
 
 interface InfoProps {
   controlledData: OutputControlledData;
+  lastData: OperationalData;
 }
 
-function Info({ controlledData }: InfoProps) {
-  const lastData = store.lastData[0];
-  const { HEATER_TEMPERATURE, TANK_LEVEL } = lastData.data;
+function Info({ controlledData, lastData }: InfoProps) {
+  const { HEATER_TEMPERATURE, TANK_TEMPERATURE } = lastData;
 
   const heaterData = useMemo(
     () => ({
       timestamp: controlledData.timestamp.slice(0, 20),
-      temperature: controlledData.heater_temperature.slice(0, 20),
+      temperature: controlledData.heaterTemperature.slice(0, 20),
     }),
     [controlledData]
   );
@@ -26,7 +26,7 @@ function Info({ controlledData }: InfoProps) {
   const tankData = useMemo(
     () => ({
       timestamp: controlledData.timestamp.slice(0, 20),
-      temperature: controlledData.tank_level.slice(0, 20),
+      temperature: controlledData.tankTemperature.slice(0, 20),
     }),
     [controlledData]
   );
@@ -50,7 +50,7 @@ function Info({ controlledData }: InfoProps) {
       </Card>
       <Card className={styles.card}>
         <div className={styles.title}>Температура</div>
-        <div className={styles.data}>{TANK_LEVEL.toFixed(3)} ℃</div>
+        <div className={styles.data}>{TANK_TEMPERATURE.toFixed(3)} ℃</div>
         <ColumnChart data={tankData} />
       </Card>
     </div>

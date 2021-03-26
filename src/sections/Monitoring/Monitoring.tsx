@@ -1,14 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import styles from './Monitoring.module.scss';
 import { observer } from 'mobx-react';
 import LineChart from 'components/Charts/LineChart/LineChart';
 import { outputStore as store } from 'stores';
 import { Card, Content, Breadcrumb, Spinner, ObjectImages } from 'components';
 import Info from './Info/Info';
+import SettingsModal from './SettingsModal/SettingsModal';
+import { Settings } from 'services/output/OutputTypes';
 
 const breadcrumbLabels = ['Dashboard', 'Monitoring'];
 
 function Monitoring() {
+  const { controlledData, lastData, isControlledDataLoaded, isLastDataLoaded } = store;
+
+  const isDataLoaded = isControlledDataLoaded && isLastDataLoaded;
+
   useEffect(() => {
     store.loadlastData();
     store.loadControlledData();
@@ -19,17 +25,26 @@ function Monitoring() {
     return () => clearInterval(loadLastData);
   }, []);
 
-  const { controlledData, lastData, isControlledDataLoaded, isLastDataLoaded } = store;
+  const handleSaveSettings = useCallback((settings: Settings) => {
+    store.saveSettings(settings);
+  }, []);
 
-  const isDataLoaded = isControlledDataLoaded && isLastDataLoaded;
   return (
     <>
       {isDataLoaded ? (
         <Content>
           <Breadcrumb labels={breadcrumbLabels} />
-          {lastData.length > 0 && controlledData && <Info controlledData={controlledData} />}
+          {lastData && controlledData && (
+            <Info controlledData={controlledData} lastData={lastData.operationalData} />
+          )}
           <Card className={styles.imagesCard}>
-            <ObjectImages objectData={lastData[0]} />
+            {lastData && (
+              <SettingsModal
+                saveSettings={handleSaveSettings}
+                lastData={lastData.operationalData}
+              />
+            )}
+            <ObjectImages objectData={lastData?.operationalData} />
           </Card>
           <Card className={styles.lineChartCard}>
             <LineChart />
