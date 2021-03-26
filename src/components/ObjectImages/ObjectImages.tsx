@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { OutputDataResponse } from 'services/output/OutputTypes';
+import { OperationalData } from 'services/output/OutputTypes';
 import styles from './ObjectImages.module.scss';
 import { ReactComponent as Scheme } from 'components/Icon/svg-icons/scheme.svg';
 import cn from 'classnames';
 
 interface ObjectImagesProps {
-  objectData: OutputDataResponse;
+  objectData?: OperationalData;
 }
 
 function ObjectImages({ objectData }: ObjectImagesProps) {
@@ -26,7 +26,7 @@ function ObjectImages({ objectData }: ObjectImagesProps) {
   return (
     <div className={styles.wrap}>
       <div style={{ left }} className={styles.dataBlock}>
-        {objectData.data.HEATER_TEMPERATURE.toFixed()} ℃
+        {objectData?.HEATER_TEMPERATURE.toFixed()} ℃
       </div>
       <Scheme ref={imgRef} className={cn(styles.img, test && styles.changed)} />
     </div>

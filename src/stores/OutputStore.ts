@@ -1,12 +1,16 @@
 import { POPOVER_MOCK_DATA } from 'commonConstants';
 import { makeAutoObservable, runInAction } from 'mobx';
-import moment from 'moment';
-import { ErrorData, OutputControlledData, OutputDataResponse } from 'services/output/OutputTypes';
+import {
+  ErrorData,
+  OutputControlledData,
+  OutputLastData,
+  Settings,
+} from 'services/output/OutputTypes';
 import api from '../services';
 
 export class OutputStore {
   service: typeof api.output;
-  lastData: OutputDataResponse[] = [];
+  lastData: OutputLastData | undefined;
   controlledData: OutputControlledData | undefined;
   errorData: ErrorData[] = POPOVER_MOCK_DATA;
   isLastDataLoaded = false;
@@ -33,12 +37,6 @@ export class OutputStore {
     try {
       const initialData = await this.service.loadControlledData();
       runInAction(() => {
-        initialData.timestamp = initialData.timestamp
-          .reverse()
-          .map((item) => moment(item).valueOf());
-        initialData.tank_level.reverse();
-        initialData.heater_temperature.reverse();
-
         this.controlledData = initialData;
         this.isControlledDataLoaded = true;
       });
@@ -47,7 +45,13 @@ export class OutputStore {
       this.isControlledDataLoaded = false;
     }
   }
-
+  async saveSettings(settings: Settings) {
+    try {
+      await this.service.saveSettings(settings);
+    } catch {
+      console.log('error');
+    }
+  }
   setResolvedErrors = (id?: number, all?: boolean) => {
     if (all) {
       this.errorData = [];
