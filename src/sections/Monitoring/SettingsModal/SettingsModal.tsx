@@ -43,14 +43,14 @@ const DEFAULT_SETTINGS: Settings = {
 
 export default function SettingsModal({ lastData, saveSettings }: SettingsModalProps) {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const { FILL_DRAIN_INT_TIME, HIGH_TEMP_AL_VALUE, HORN_BLINK_INT_TIME, SYSTEM_MODE } = lastData;
+  const { fillDrainIntTime, highTempAlValue, hornBlinkIntTime, systemMode } = lastData;
   const placeholders = {
-    [SettingsLabels.FILL_DRAIN_INT_TIME]: FILL_DRAIN_INT_TIME.toFixed(),
-    [SettingsLabels.HIGH_TEMP_AL_VALUE]: HIGH_TEMP_AL_VALUE.toFixed(),
-    [SettingsLabels.HORN_BLINK_INT_TIME]: HORN_BLINK_INT_TIME.toFixed(),
+    [SettingsLabels.FILL_DRAIN_INT_TIME]: fillDrainIntTime.toFixed(),
+    [SettingsLabels.HIGH_TEMP_AL_VALUE]: highTempAlValue.toFixed(),
+    [SettingsLabels.HORN_BLINK_INT_TIME]: hornBlinkIntTime.toFixed(),
   };
   const [settings, setSettings] = useState<Settings>({
-    remoteOnOff: SYSTEM_MODE ? true : false,
+    remoteOnOff: systemMode ? true : false,
   });
 
   // if more modals, move to store;

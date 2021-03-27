@@ -5,14 +5,14 @@ export interface OutputLastData {
 }
 
 export interface OperationalData {
-  HORN_BLINK_INT_TIME: number;
-  FILL_DRAIN_INT_TIME: number;
-  HEATER_TEMPERATURE: number;
-  HIGH_TEMP_AL_VALUE: number;
-  SUPPLY_VALVE_OUT_BIT: boolean;
-  SYSTEM_MODE: number;
-  TANK_PUMP_BIT: boolean;
-  TANK_TEMPERATURE: number;
+  hornBlinkIntTime: number;
+  fillDrainIntTime: number;
+  heaterTemperature: number;
+  highTempAlValue: number;
+  supplyValveOutBit: boolean;
+  systemMode: number;
+  tankPumpBit: boolean;
+  tankTemperature: number;
 }
 
 export interface OutputControlledData {

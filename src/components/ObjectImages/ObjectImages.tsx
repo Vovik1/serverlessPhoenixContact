@@ -26,7 +26,7 @@ function ObjectImages({ objectData }: ObjectImagesProps) {
   return (
     <div className={styles.wrap}>
       <div style={{ left }} className={styles.dataBlock}>
-        {objectData?.HEATER_TEMPERATURE.toFixed()} ℃
+        {objectData?.heaterTemperature.toFixed()} ℃
       </div>
       <Scheme ref={imgRef} className={cn(styles.img, test && styles.changed)} />
     </div>

@@ -13,7 +13,7 @@ interface InfoProps {
 }
 
 function Info({ controlledData, lastData }: InfoProps) {
-  const { HEATER_TEMPERATURE, TANK_TEMPERATURE } = lastData;
+  const { heaterTemperature, tankTemperature } = lastData;
 
   const heaterData = useMemo(
     () => ({
@@ -35,7 +35,7 @@ function Info({ controlledData, lastData }: InfoProps) {
     <div className={styles.wrap}>
       <Card className={styles.card}>
         <div className={styles.title}>Температура</div>
-        <div className={styles.data}>{HEATER_TEMPERATURE.toFixed(3)} ℃</div>
+        <div className={styles.data}>{heaterTemperature.toFixed(3)} ℃</div>
         <Area data={heaterData} type={AreaChartTypes.LEVEL} />
       </Card>
       <Card className={styles.card}>
@@ -50,7 +50,7 @@ function Info({ controlledData, lastData }: InfoProps) {
       </Card>
       <Card className={styles.card}>
         <div className={styles.title}>Температура</div>
-        <div className={styles.data}>{TANK_TEMPERATURE.toFixed(3)} ℃</div>
+        <div className={styles.data}>{tankTemperature.toFixed(3)} ℃</div>
         <ColumnChart data={tankData} />
       </Card>
     </div>
