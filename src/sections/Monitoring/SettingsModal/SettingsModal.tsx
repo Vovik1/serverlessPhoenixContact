@@ -77,7 +77,7 @@ export default function SettingsModal({ lastData, saveSettings }: SettingsModalP
         Настройки
       </Button>
       <Modal
-        title="Настройки контроллера"
+        title="Настройки контролера"
         open={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}

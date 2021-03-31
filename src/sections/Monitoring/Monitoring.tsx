@@ -45,7 +45,10 @@ function Monitoring() {
                     saveSettings={handleSaveSettings}
                     lastData={lastData.operationalData}
                   />
-                  <ObjectImages objectData={lastData.operationalData} />
+                  <ObjectImages
+                    saveSettings={handleSaveSettings}
+                    objectData={lastData.operationalData}
+                  />
                 </>
               )}
             </>

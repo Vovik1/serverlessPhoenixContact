@@ -4,6 +4,15 @@
   display: flex;
   width: 100%;
   position: relative;
+  .level,
+  .level0 {
+    :global {
+      .bottom {
+        transform: translate(0, -90px);
+        height: 280px;
+      }
+    }
+  }
   .dataBlock {
     position: absolute;
     font-size: 15px;
@@ -17,48 +26,48 @@
   .level1 {
     :global {
       .bottom {
-        transform: translate(0, $object-gap);
-        height: 190px - $object-gap;
+        transform: translate(0, -90px + $object-gap);
+        height: 280px - $object-gap;
       }
     }
   }
   .level2 {
     :global {
       .bottom {
-        transform: translate(0, $object-gap * 2);
-        height: 190px - $object-gap * 2;
+        transform: translate(0, -90px + $object-gap * 2);
+        height: 280px - $object-gap * 2;
       }
     }
   }
   .level3 {
     :global {
       .bottom {
-        transform: translate(0, $object-gap * 3);
-        height: 190px - $object-gap * 3;
+        transform: translate(0, -90px + $object-gap * 3);
+        height: 280px - $object-gap * 3;
       }
     }
   }
   .level4 {
     :global {
       .bottom {
-        transform: translate(0, $object-gap * 4);
-        height: 190px - $object-gap * 4;
+        transform: translate(0, -90px + $object-gap * 4);
+        height: 280px - $object-gap * 4;
       }
     }
   }
   .level5 {
     :global {
       .bottom {
-        transform: translate(0, $object-gap * 5);
-        height: 190px - $object-gap * 5;
+        transform: translate(0, -90px + $object-gap * 5);
+        height: 280px - $object-gap * 5;
       }
     }
   }
   .level6 {
     :global {
       .bottom {
-        transform: translate(0, $object-gap * 6);
-        height: 190px - $object-gap * 6;
+        transform: translate(0, -90px + $object-gap * 6);
+        height: 280px - $object-gap * 6;
       }
     }
   }
@@ -74,7 +83,7 @@
     :global {
       .bottom {
         transform: translate(0, -$object-gap-fill);
-        height: 190px + $object-gap-fill;
+        height: 280px + $object-gap-fill;
       }
     }
   }
@@ -82,7 +91,7 @@
     :global {
       .bottom {
         transform: translate(0, -$object-gap-fill * 2);
-        height: 190px + $object-gap-fill * 2;
+        height: 280px + $object-gap-fill * 2;
       }
     }
   }
@@ -90,7 +99,7 @@
     :global {
       .bottom {
         transform: translate(0, -$object-gap-fill * 3);
-        height: 190px + $object-gap-fill * 3;
+        height: 280px + $object-gap-fill * 3;
       }
     }
   }
@@ -98,7 +107,7 @@
     :global {
       .bottom {
         transform: translate(0, -$object-gap-fill * 4);
-        height: 190px + $object-gap-fill * 4;
+        height: 280px + $object-gap-fill * 4;
       }
     }
   }
@@ -106,7 +115,7 @@
     :global {
       .bottom {
         transform: translate(0, -$object-gap-fill * 5);
-        height: 190px + $object-gap-fill * 5;
+        height: 280px + $object-gap-fill * 5;
       }
     }
   }
