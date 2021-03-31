@@ -38,13 +38,17 @@ function Monitoring() {
             <Info controlledData={controlledData} lastData={lastData.operationalData} />
           )}
           <Card className={styles.imagesCard}>
-            {lastData && (
-              <SettingsModal
-                saveSettings={handleSaveSettings}
-                lastData={lastData.operationalData}
-              />
-            )}
-            <ObjectImages objectData={lastData?.operationalData} />
+            <>
+              {lastData && (
+                <>
+                  <SettingsModal
+                    saveSettings={handleSaveSettings}
+                    lastData={lastData.operationalData}
+                  />
+                  <ObjectImages objectData={lastData.operationalData} />
+                </>
+              )}
+            </>
           </Card>
           <Card className={styles.lineChartCard}>
             <LineChart />

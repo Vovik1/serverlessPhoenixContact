@@ -1,11 +1,66 @@
+@import 'variables';
+
 .wrap {
   display: flex;
   width: 100%;
   position: relative;
   .dataBlock {
     position: absolute;
-    top: 28%;
     font-size: 15px;
+    &.dataTankBlock {
+      top: 28%;
+    }
+    &.dataHeaterBlock {
+      top: 32%;
+    }
+  }
+  .level1 {
+    :global {
+      .bottom {
+        transform: translate(0, $object-gap);
+        height: 190px - $object-gap;
+      }
+    }
+  }
+  .level2 {
+    :global {
+      .bottom {
+        transform: translate(0, $object-gap * 2);
+        height: 190px - $object-gap * 2;
+      }
+    }
+  }
+  .level3 {
+    :global {
+      .bottom {
+        transform: translate(0, $object-gap * 3);
+        height: 190px - $object-gap * 3;
+      }
+    }
+  }
+  .level4 {
+    :global {
+      .bottom {
+        transform: translate(0, $object-gap * 4);
+        height: 190px - $object-gap * 4;
+      }
+    }
+  }
+  .level5 {
+    :global {
+      .bottom {
+        transform: translate(0, $object-gap * 5);
+        height: 190px - $object-gap * 5;
+      }
+    }
+  }
+  .level6 {
+    :global {
+      .bottom {
+        transform: translate(0, $object-gap * 6);
+        height: 190px - $object-gap * 6;
+      }
+    }
   }
 }
 .img {
@@ -13,10 +68,46 @@
   max-width: 600px;
   height: 100%;
 }
-.changed {
-  :global {
-    .test {
-      fill: red;
+
+.fill {
+  .level1 {
+    :global {
+      .bottom {
+        transform: translate(0, -$object-gap-fill);
+        height: 190px + $object-gap-fill;
+      }
+    }
+  }
+  .level2 {
+    :global {
+      .bottom {
+        transform: translate(0, -$object-gap-fill * 2);
+        height: 190px + $object-gap-fill * 2;
+      }
+    }
+  }
+  .level3 {
+    :global {
+      .bottom {
+        transform: translate(0, -$object-gap-fill * 3);
+        height: 190px + $object-gap-fill * 3;
+      }
+    }
+  }
+  .level4 {
+    :global {
+      .bottom {
+        transform: translate(0, -$object-gap-fill * 4);
+        height: 190px + $object-gap-fill * 4;
+      }
+    }
+  }
+  .level5 {
+    :global {
+      .bottom {
+        transform: translate(0, -$object-gap-fill * 5);
+        height: 190px + $object-gap-fill * 5;
+      }
     }
   }
 }

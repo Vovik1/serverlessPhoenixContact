@@ -1,15 +1,26 @@
 import { SeriesOptionsType } from 'highcharts';
-import { ChartConfigOptions, ChartData } from '../types';
+import { ChartConfigOptions, LineChartData } from '../types';
 
-export const getChartConfig = (data: ChartData): ChartConfigOptions => {
-  const seriesData = data.timestamp.map((item, index) => [item, data.temperature[index]]);
+export const getChartConfig = (data: LineChartData): ChartConfigOptions => {
+  const heaterData: number[][] = [];
+  const tankData: number[][] = [];
+  data.timestamp.forEach((item, index) => {
+    heaterData.push([item, data.heaterTemperature[index]]);
+    tankData.push([item, data.tankTemperature[index]]);
+  });
 
   const series = [
     {
       color: '#1890ff',
       type: 'line',
-      name: 'Температура',
-      data: seriesData,
+      name: 'Heater',
+      data: heaterData,
+    } as SeriesOptionsType,
+    {
+      color: 'red',
+      type: 'line',
+      name: 'Tank',
+      data: tankData,
     } as SeriesOptionsType,
   ];
 
@@ -44,14 +55,24 @@ export const getChartConfig = (data: ChartData): ChartConfigOptions => {
       type: 'datetime',
     },
 
-    yAxis: {
-      opposite: false,
-      // type: 'logarithmic',
-      gridLineDashStyle: 'Dash',
-      title: {
-        text: 'Температура',
+    yAxis: [
+      {
+        opposite: false,
+        // type: 'logarithmic',
+        gridLineDashStyle: 'Dash',
+        title: {
+          text: 'Heater Temperature',
+        },
       },
-    },
+      {
+        opposite: true,
+        // type: 'logarithmic',
+        gridLineDashStyle: 'Dash',
+        title: {
+          text: 'Tank Temperature',
+        },
+      },
+    ],
     series,
   };
 };

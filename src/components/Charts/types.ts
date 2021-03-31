@@ -15,6 +15,12 @@ export interface ChartData {
   temperature: number[];
 }
 
+export interface LineChartData {
+  timestamp: number[];
+  heaterTemperature: number[];
+  tankTemperature: number[];
+}
+
 export interface ChartRef {
   chart: Chart;
   container: RefObject<HTMLDivElement>;

@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useCallback, useState } from 'react';
 import { Button } from 'antd';
-import { Input, Modal, Switch } from 'components';
+import { Input, Modal } from 'components';
 import styles from './SettingsModal.module.scss';
 import { OperationalData, Settings } from 'services/output/OutputTypes';
 import { toNumber } from 'lodash';
@@ -37,21 +37,15 @@ const options = [
   },
 ];
 
-const DEFAULT_SETTINGS: Settings = {
-  remoteOnOff: false,
-};
-
 export default function SettingsModal({ lastData, saveSettings }: SettingsModalProps) {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const { fillDrainIntTime, highTempAlValue, hornBlinkIntTime, systemMode } = lastData;
+  const { fillDrainIntTime, highTempAlValue, hornBlinkIntTime } = lastData;
   const placeholders = {
     [SettingsLabels.FILL_DRAIN_INT_TIME]: fillDrainIntTime.toFixed(),
     [SettingsLabels.HIGH_TEMP_AL_VALUE]: highTempAlValue.toFixed(),
     [SettingsLabels.HORN_BLINK_INT_TIME]: hornBlinkIntTime.toFixed(),
   };
-  const [settings, setSettings] = useState<Settings>({
-    remoteOnOff: systemMode ? true : false,
-  });
+  const [settings, setSettings] = useState<Settings>({});
 
   // if more modals, move to store;
   const showModal = useCallback(() => {
@@ -61,12 +55,12 @@ export default function SettingsModal({ lastData, saveSettings }: SettingsModalP
   const handleOk = useCallback(() => {
     setIsModalVisible(false);
     saveSettings(settings);
-    setSettings({ ...DEFAULT_SETTINGS });
+    setSettings({});
   }, [settings, saveSettings]);
 
   const handleCancel = useCallback(() => {
     setIsModalVisible(false);
-    setSettings({ ...DEFAULT_SETTINGS });
+    setSettings({});
   }, []);
 
   const handleInputChange = useCallback(
@@ -77,12 +71,6 @@ export default function SettingsModal({ lastData, saveSettings }: SettingsModalP
     [settings]
   );
 
-  const handleSwitchChange = useCallback(
-    (checked: boolean) => {
-      setSettings({ ...settings, remoteOnOff: checked });
-    },
-    [settings]
-  );
   return (
     <div className={styles.settingsWrapper}>
       <Button type="primary" onClick={showModal}>
@@ -105,7 +93,6 @@ export default function SettingsModal({ lastData, saveSettings }: SettingsModalP
             placeholder={placeholders[setting]}
           />
         ))}
-        <Switch label="Викл/Вмк" checked={settings.remoteOnOff} onChange={handleSwitchChange} />
       </Modal>
     </div>
   );
