@@ -28,8 +28,8 @@ export interface ErrorData {
 }
 
 export interface Settings {
-  FILL_DRAIN_INT_TIME?: number;
+  fillDrainIntTime?: number;
   remoteOnOff?: boolean;
-  HIGH_TEMP_AL_VALUE?: number;
-  HORN_BLINK_INT_TIME?: number;
+  highTempAlValue?: number;
+  hornBlinkIntTime?: number;
 }

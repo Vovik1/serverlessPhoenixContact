@@ -11,9 +11,9 @@ interface SettingsModalProps {
 }
 
 enum SettingsLabels {
-  FILL_DRAIN_INT_TIME = 'FILL_DRAIN_INT_TIME',
-  HIGH_TEMP_AL_VALUE = 'HIGH_TEMP_AL_VALUE',
-  HORN_BLINK_INT_TIME = 'HORN_BLINK_INT_TIME',
+  FILL_DRAIN_INT_TIME = 'fillDrainIntTime',
+  HIGH_TEMP_AL_VALUE = 'highTempAlValue',
+  HORN_BLINK_INT_TIME = 'hornBlinkIntTime',
 }
 
 const options = [
