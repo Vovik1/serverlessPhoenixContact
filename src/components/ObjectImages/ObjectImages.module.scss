@@ -82,7 +82,7 @@
   .level1 {
     :global {
       .bottom {
-        transform: translate(0, -$object-gap-fill);
+        transform: translate(0, -90px - $object-gap-fill);
         height: 280px + $object-gap-fill;
       }
     }
@@ -90,7 +90,7 @@
   .level2 {
     :global {
       .bottom {
-        transform: translate(0, -$object-gap-fill * 2);
+        transform: translate(0, -90px - $object-gap-fill * 2);
         height: 280px + $object-gap-fill * 2;
       }
     }
@@ -98,7 +98,7 @@
   .level3 {
     :global {
       .bottom {
-        transform: translate(0, -$object-gap-fill * 3);
+        transform: translate(0, -90px - $object-gap-fill * 3);
         height: 280px + $object-gap-fill * 3;
       }
     }
@@ -106,7 +106,7 @@
   .level4 {
     :global {
       .bottom {
-        transform: translate(0, -$object-gap-fill * 4);
+        transform: translate(0, -90px - $object-gap-fill * 4);
         height: 280px + $object-gap-fill * 4;
       }
     }
@@ -114,7 +114,7 @@
   .level5 {
     :global {
       .bottom {
-        transform: translate(0, -$object-gap-fill * 5);
+        transform: translate(0, -90px - $object-gap-fill * 5);
         height: 280px + $object-gap-fill * 5;
       }
     }

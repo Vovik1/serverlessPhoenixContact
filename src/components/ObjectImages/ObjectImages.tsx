@@ -84,7 +84,7 @@ function ObjectImages({ objectData, saveSettings }: ObjectImagesProps) {
       <Scheme
         ref={imgRef}
         className={cn(styles.img, {
-          [styles[className]]: !isChecked,
+          [styles[className]]: true,
         })}
       />
       <Switch label="Викл/Вмк" checked={checked} onChange={handleSwitchChange} />
